@@ -55,3 +55,17 @@ npm run dev
 ```
 
 You should see now the webpage in your browser.
+
+
+## 💻&nbsp; Technologies used
+
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+
+## 👩‍👩‍👧‍👧 Back-end Contributors
+
+Contributors that made this possible:
+
+1. Lorena Gil.
+2. Irene Martin
