@@ -1,3 +1,5 @@
+Go to [command page](commands.md) to have a guide of commands to create migraions, controllers, models and more.
+
 ##  🚀&nbsp; Installation and Documentation
 
 1. To use this code, you must have the following installed:
