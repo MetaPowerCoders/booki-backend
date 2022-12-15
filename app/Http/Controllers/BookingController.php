@@ -20,8 +20,6 @@ class BookingController extends Controller
         $dates_by_event = DB::select( DB::raw("SELECT date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
         $response = [];
 
-        // echo  $dates_by_event;
-
         for($i = 0; $i < count($bookings); $i++){
             $date = $this->findObjectByDate($bookings[$i]->date,  $dates_by_event);
             //$response[] = new BookingDTO($bookings[$i]->id, $bookings[$i]->username, $event_id, $bookings[$i]->date, ($date->count*100) / count($bookings));
@@ -33,17 +31,7 @@ class BookingController extends Controller
             ];
         }
 
-        return response( $response, 200)->header('Content-Type', 'text/plain');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response($response, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -65,28 +53,6 @@ class BookingController extends Controller
             $booking->save();
         }
         return response(200)->header('Content-Type', 'text/plain');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, $event_id)
-    {
-
     }
 
     /**
@@ -112,24 +78,13 @@ class BookingController extends Controller
         return response(200)->header('Content-Type', 'text/plain');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     function findObjectByDate($date, $array){
-    foreach ( $array as $element ) {
-        if ( $date == $element->date) {
-            return $element;
+        foreach ( $array as $element ) {
+            if ( $date == $element->date) {
+                return $element;
+            }
         }
-    }
 
-    return false;
-}
+        return false;
+    }
 }
