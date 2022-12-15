@@ -18,8 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('username');
             $table->foreignId('event_id')->constrained();
-            $table->integer('date');
-            $table->integer('time');
+            $table->timestamp('date');
         });
     }
 

@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/event/{event_id}/booking/', [BookingController::class, 'index']);
 Route::post('/event/{event_id}/booking/', [BookingController::class, 'store']);
-Route::delete('/profile', [BookingController::class, 'destroy']);
+Route::put('/event/{event_id}/booking/', [BookingController::class, 'update']);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use BookingDTO;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -15,7 +17,23 @@ class BookingController extends Controller
     public function index($event_id)
     {
         $bookings = Booking::where('event_id', $event_id)->get();
-        return response($bookings, 200)->header('Content-Type', 'text/plain');
+        $dates_by_event = DB::select( DB::raw("SELECT date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
+        $response = [];
+
+        // echo  $dates_by_event;
+
+        for($i = 0; $i < count($bookings); $i++){
+            $date = $this->findObjectByDate($bookings[$i]->date,  $dates_by_event);
+            //$response[] = new BookingDTO($bookings[$i]->id, $bookings[$i]->username, $event_id, $bookings[$i]->date, ($date->count*100) / count($bookings));
+            $response[] = [
+                'id' => $bookings[$i]->id,
+                'username' => $bookings[$i]->username,
+                'date' => $bookings[$i]->date,
+                'percentage' =>($date->count*100) / count($bookings)
+            ];
+        }
+
+        return response( $response, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -36,19 +54,16 @@ class BookingController extends Controller
      */
     public function store(Request $request, $event_id)
     {
-        // $request->validate([
-        //     'username' => 'required',
-        //     'startTimestamp:' => 'required'
-        // ]);
 
-        $booking = new Booking([
-            'username' => $request->username,
-            'event_id' => $event_id,
-            'date' => $request->date,
-            'time' => $request->time
-        ]);
+        for($i = 0; $i < count($request->timestamps); $i++){
+            $booking = new Booking([
+                'username' => $request->username,
+                'event_id' => $event_id,
+                'date' => $request->timestamps($i)
+            ]);
 
-        $booking->save();
+            $booking->save();
+        }
         return response(200)->header('Content-Type', 'text/plain');
     }
 
@@ -69,9 +84,9 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $event_id)
     {
-        //
+
     }
 
     /**
@@ -81,9 +96,20 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $event_id)
     {
-        //
+        Booking::where('event_id', $event_id)->delete();
+
+        for($i = 0; $i < count($request->timestamps); $i++){
+            $booking = new Booking([
+                'username' => $request->username,
+                'event_id' => $event_id,
+                'date' => $request->timestamps($i)
+            ]);
+
+            $booking->save();
+        }
+        return response(200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -96,4 +122,14 @@ class BookingController extends Controller
     {
         //
     }
+
+    function findObjectByDate($date, $array){
+    foreach ( $array as $element ) {
+        if ( $date == $element->date) {
+            return $element;
+        }
+    }
+
+    return false;
+}
 }
