@@ -34,27 +34,22 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $event_id)
     {
-
-        echo $request;
-
         // $request->validate([
         //     'username' => 'required',
         //     'startTimestamp:' => 'required'
         // ]);
 
         $booking = new Booking([
-            'name' => $request->username,
-            'event_id' => 1,
-            'date' => $request->startTimestamp,
-            'time' => $request->startTimestamp
+            'username' => $request->username,
+            'event_id' => $event_id,
+            'date' => $request->date,
+            'time' => $request->time
         ]);
 
         $booking->save();
-
-
-            // return response(200)->header('Content-Type', 'text/plain');
+        return response(200)->header('Content-Type', 'text/plain');
     }
 
     /**
