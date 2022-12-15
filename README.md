@@ -56,6 +56,23 @@ npm run dev
 
 You should see now the webpage in your browser.
 
+### **Method available:**
+
+  `GET` | `POST`| `PUT`| `DELETE`
+
+
+<br>
+
+| Method   | Endpoint                    | Description                                 |
+| -------- | --------------------------- | ------------------------------------------- |
+| `GET`    | `/event/{id}`               | Retrieve the event for specific id.         |
+| `POST`   | `/event`                    | Create a event.                             |
+| `DELETE` | `/event/{id}`               | Remove event by id                          |
+| `PUT`    | `/event/{id}`               | Edit event                                  |
+| `GET`    | `/event/{event_id}/booking/`| Get all bookings associated with an event id|
+| `PUT`    | `/event/{event_id}/booking/`| Edit bookings for specific event id         |
+| `POST`   | `/event/{event_id}/booking/`| Create a booking for a specific event id    |
+
 
 ## 💻&nbsp; Technologies used
 
