@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Booking route
+
+Route::get('/event/{event_id}/booking/', [BookingController::class, 'index']);
+Route::post('/event/{event_id}/booking/', [BookingController::class, 'store']);
+Route::delete('/profile', [BookingController::class, 'destroy']);
 
 Route::get('/', function () {
     return view('welcome');
