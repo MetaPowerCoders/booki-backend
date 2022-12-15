@@ -42,9 +42,13 @@ sail artisan make:model model-name
 ```
 ### location for controllers: app/Models
 
-### Roll back migration:
+### Roll back migrations (All of them):
 ```
-
+sail artisan migrate:rollback
+```
+### Roll back migrations (Only one):
+```
+sail artisan migrate:rollback --step=1
 ```
 
 ### Run migration command:
