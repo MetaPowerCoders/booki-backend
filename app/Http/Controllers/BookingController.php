@@ -16,7 +16,7 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
         $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = $event_id group by username"));
         $response = [];
 
@@ -33,7 +33,7 @@ class BookingController extends Controller
         }
 
 
-        return response($response, 200)->header('Content-Type', 'text/plain');
+        return response($dates_by_event, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -68,13 +68,13 @@ class BookingController extends Controller
     {
         // Booking::where('event_id', $event_id)->delete();
 
-        Booking::where(['event_id', $event_id],['username', $request->username])->delete();
+        Booking::where([['event_id', $event_id],['username', $request->username]])->delete();
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
                 'username' => $request->username,
                 'event_id' => $event_id,
-                'date' => $request->timestamps($i)
+                'date' => $request->timestamps[$i]
             ]);
 
             $booking->save();
@@ -94,8 +94,6 @@ class BookingController extends Controller
 
     function findNoAttendeesForDate($attendees, $total_attendees){
 
-        // $attendees = "Lucas,Maria,Sonia"
-        // $total_attendees = [{"username":"Lucas","count":1},{"username":"Maria","count":1},{"username":"Sonia","count":2}]
         $result = '';
         foreach ($total_attendees as $element){
             if(!str_contains($attendees, $element->username)){
