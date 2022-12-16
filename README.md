@@ -1,9 +1,30 @@
-Go to [command page](commands.md) to have a guide of commands to create migraions, controllers, models and more.
+Go to [command page](commands.md) to have a guide of commands to create migrations, controllers, models and more.
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block"> 📋 Table of Contents</h2></summary>
+  <ol>
+    <li>Installation and Documentation</li>
+    <li>Technology used</li>
+    <li> Have a question?</li>
+    <li> Found a bug?</li>
+    <li> Requirements</li>
+    <li> License</li>
+  </ol>
+</details>
+
 
 ##  🚀&nbsp; Installation and Documentation
 
+You will need to clone the code from [booki-backend](https://github.com/MetaPowerCoders/booki-backend.git).
+Once it is done, please run:
+
 1. To use this code, you must have the following installed:
-Docker.
+
+    1. Docker
+    2. TablePlus
+    3. IDE
+
 2. It will need to be opened and running. Make sure checking the below:
 
 <img style='width:50%' src='readme-images/docker.png'>
@@ -42,19 +63,7 @@ If any task is not running, open the container and click play.
 sail artisan migrate
 ```
 
-6. Run:
-
-```
-npm init vite-app name-app
-```
-if the terminal is asking you to instal vite proceed with Y. After run:
-
-```
-npm install
-npm run dev
-```
-
-You should see now the webpage in your browser.
+You should have the database up to date and ready to be tried!
 
 ### **Method available:**
 
@@ -87,3 +96,25 @@ Contributors that made this possible:
 
 1. Lorena Gil.
 2. Irene Martin
+
+## 📫&nbsp; Have a question? Want to chat? Ran into a problem?
+
+We are happy to hearing about your questions and concerns. Please don't hesitate to contact us for any issue you can experiment.
+
+---
+
+## 🤝&nbsp; Found a bug? Missing a specific feature?
+
+Feel free to **file a new issue** with a respective title and description on the [booki-backend Issues](https://github.com/MetaPowerCoders/booki-backend/issues). I really will appreciate your feedback to improve the system.
+
+---
+
+## ✅&nbsp; Requirements
+
+You should have IDE, docker, tablePlus and Postman. Clone the repository from [booki-backend](https://github.com/MetaPowerCoders/booki-backend.git) and try it!
+
+---
+
+## ©️&nbsp; License
+
+Made with ❤️&nbsp;️ in London. Copyright © 2022 MetaPowerCoders and follow the [MIT License](LICENSE).
