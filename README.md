@@ -17,7 +17,6 @@ Go to [command page](commands.md) to have a guide of commands to create migratio
 ##  🚀&nbsp; Installation and Documentation
 
 You will need to clone the code from [booki-backend](https://github.com/MetaPowerCoders/booki-backend.git).
-Once it is done, please run:
 
 1. To use this code, you must have the following installed:
 
