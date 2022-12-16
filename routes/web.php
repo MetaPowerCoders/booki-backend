@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+//Event route
+
+Route::get('/event', [EventController::class, 'index']);
+Route::get('/event/{id}', [EventController::class, 'show']);
+Route::post('/event', [EventController::class, 'store']);
+Route::put('/event/{id}', [EventController::class, 'update']);
+Route::delete('/event/{id}', [EventController::class, 'destroy']);
 
 // Booking route
 

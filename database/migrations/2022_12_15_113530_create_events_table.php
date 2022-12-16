@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->string('title');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->integer('duration');
             $table->string('hostname');
             $table->timestamps();
