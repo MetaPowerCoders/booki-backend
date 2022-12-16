@@ -4,23 +4,6 @@ layout: template
 filename: commands.md
 ---
 
-## to start the app make sure you have docker running
-
-```
-./vendor/bin/sail up
-```
-
-or
-
-```
-sail up
-```
-
-### edit values on .env file to connect with database.
-### make sure your database is also running on docker, otherwise click play. (running (6/6)
-
-## connect the db with details added on the .env file.
-
 ## to create a new migration:
 
 ```
