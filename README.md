@@ -25,7 +25,7 @@ Once it is done, please run:
     2. TablePlus
     3. IDE
 
-2. It will need to be opened and running. Make sure checking the below:
+2. Docker will need to be opened and running. Make sure checking the below:
 
 <img style='width:50%' src='readme-images/docker.png'>
 
@@ -43,13 +43,13 @@ run:
 ./vendor/bin/sail up
 ```
 
-Go to [alias page](alias.md) to know how to create an alias and simplify this command.
+Go to [alias page](alias.md) to know how to create an alias and simplify this command. Please note, we will use the simplify command in the following steps.
 
 This will take a bit to install all, once is all done, check on docker if all task are running. Something similar to:
 
 <img style='width:50%' src='readme-images/docker-running.png'>
 
-If any task is not running, open the container and click play.
+If any task is not running, expand the container and click play in the task missing to make it run.
 
 4. Connect your database on TablePlus.
     1. Open tablePlus and create a new connection.
