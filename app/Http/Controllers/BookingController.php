@@ -105,4 +105,16 @@ class BookingController extends Controller
 
         return $result;
     }
+    /**
+     * Return the dates selected by the host
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function hostnameDates($event_id, $hostname)
+    {
+        $booking = Booking::where([['event_id', $event_id],['username', $hostname]])->get();
+        return response($booking, 200)->header('Content-Type', 'text/plain');
+    }
+
 }
