@@ -27,6 +27,6 @@ Route::delete('/event/{id}', [EventController::class, 'destroy']);
 // Booking route
 
 Route::get('/event/{event_id}/booking/', [BookingController::class, 'index']);
-Route::get('/event/{event_id}/booking/{hostname}', [BookingController::class, 'hostnameDates']);
+Route::get('/event/{event_id}/booking/{username}', [BookingController::class, 'usernameDates']);
 Route::post('/event/{event_id}/booking/', [BookingController::class, 'store']);
 Route::put('/event/{event_id}/booking/', [BookingController::class, 'update']);

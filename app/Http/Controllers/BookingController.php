@@ -16,18 +16,16 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
         $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = $event_id group by username"));
         $response = [];
 
         for($i = 0; $i < count($dates_by_event); $i++){
             //$response[] = new BookingDTO($bookings[$i]->id, $bookings[$i]->username, $event_id, $bookings[$i]->date, ($date->count*100) / count($bookings));
-
             $response[] = [
                 'id' => $event_id,
-                'can_attend' => $dates_by_event[$i]->username,
                 'date' => $dates_by_event[$i]->date,
-                'percentage' =>($dates_by_event[$i]->count*100) / count($total_attendees),
+                'can_attend' => explode(',',$dates_by_event[$i]->username),
                 'cannot_attend' => $this->findNoAttendeesForDate($dates_by_event[$i]->username,  $total_attendees)
             ];
         }
@@ -66,15 +64,13 @@ class BookingController extends Controller
      */
     public function update(Request $request, $event_id)
     {
-        // Booking::where('event_id', $event_id)->delete();
-
-        Booking::where(['event_id', $event_id],['username', $request->username])->delete();
+        Booking::where([['event_id', $event_id],['username', $request->username]])->delete();
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
                 'username' => $request->username,
                 'event_id' => $event_id,
-                'date' => $request->timestamps($i)
+                'date' => $request->timestamps[$i]
             ]);
 
             $booking->save();
@@ -94,12 +90,10 @@ class BookingController extends Controller
 
     function findNoAttendeesForDate($attendees, $total_attendees){
 
-        // $attendees = "Lucas,Maria,Sonia"
-        // $total_attendees = [{"username":"Lucas","count":1},{"username":"Maria","count":1},{"username":"Sonia","count":2}]
-        $result = '';
+        $result = [];
         foreach ($total_attendees as $element){
             if(!str_contains($attendees, $element->username)){
-                $result.=$element->username.',';
+                $result[] = $element->username;
             }
         }
 
@@ -111,9 +105,9 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function hostnameDates($event_id, $hostname)
+    public function usernameDates($event_id, $username)
     {
-        $booking = Booking::where([['event_id', $event_id],['username', $hostname]])->get();
+        $booking = Booking::where([['event_id', $event_id],['username', $username]])->get();
         return response($booking, 200)->header('Content-Type', 'text/plain');
     }
 

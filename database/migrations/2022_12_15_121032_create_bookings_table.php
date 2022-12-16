@@ -22,7 +22,7 @@ return new class extends Migration
             ->references('uuid')
             ->on('events')
             ->onDelete('cascade');
-            $table->timestamp('date');
+            $table->integer('date');
         });
     }
 
