@@ -17,7 +17,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('username');
-            $table->foreignId('event_id')->constrained();
+            $table->uuid('event_id')->nullable(false);
+            $table->foreign('event_id')
+            ->references('uuid')
+            ->on('events')
+            ->onDelete('cascade');
             $table->timestamp('date');
         });
     }
