@@ -71,16 +71,42 @@ You should have the database up to date and ready to be tried!
 
 <br>
 
-| Method   | Endpoint                              | Description                                 |
-| -------- | ------------------------------------- | ------------------------------------------- |
-| `GET`    | `/event/{id}`                         | Retrieve the event for specific id.         |
-| `POST`   | `/event`                              | Create a event.                             |
-| `DELETE` | `/event/{id}`                         | Remove event by id                          |
-| `PUT`    | `/event/{id}`                         | Edit event                                  |
-| `GET`    | `/event/{event_id}/booking/`          | Get all bookings associated with an event id|
-| `PUT`    | `/event/{event_id}/booking/`          | Edit bookings for specific event id         |
-| `POST`   | `/event/{event_id}/booking/`          | Create a booking for a specific event id    |
-| `GET`    | `/event/{event_id}/booking/{username}`| Retrieve the booking for specific username  |
+| Method   | Endpoint                              | Description                                 |  params   | response    |
+| -------- | ------------------------------------- | ------------------------------------------- |-----------|-------------|
+| `GET`    | `/event/{id}`                         | Retrieve the event for specific id.         | none      | event obj   |
+| `POST`   | `/event`                              | Create a event.                             | event obj | HTTP verb   |
+| `DELETE` | `/event/{id}`                         | Remove event by id                          | none      | HHTP verb   |
+| `PUT`    | `/event/{id}`                         | Edit event                                  | none      | HTTP verb   |
+| `GET`    | `/event/{event_id}/booking/`          | Get all bookings associated with an event id| none      | booking obj |
+| `PUT`    | `/event/{event_id}/booking/`          | Edit bookings for specific event id         | booking obj| HTTP verb  |
+| `POST`   | `/event/{event_id}/booking/`          | Create a booking for a specific event id    | booking obj| HTTP verb  |
+| `GET`    | `/event/{event_id}/booking/{username}`| Retrieve the booking for specific username  | none       | List<booking obj>|
+
+<br>
+
+### **Json to get/post information:**
+#### event obj
+
+```
+{
+	hostName: "Garcia",
+	eventName: "Tango",
+	?description: "tango meeting",
+	durationSeconds: 123456
+
+}
+```
+
+#### booking obj
+
+Note: timestamps are day and time calculated in seconds
+
+```
+{
+    "username" : "Lucas",
+    "timestamps" : [212343234, 43243245434]
+}
+```
 
 
 ## 💻&nbsp; Technologies used
