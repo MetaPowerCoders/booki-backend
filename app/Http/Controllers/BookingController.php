@@ -18,6 +18,7 @@ class BookingController extends Controller
     {
         $bookings = Booking::where('event_id', $event_id)->get();
         $dates_by_event = DB::select( DB::raw("SELECT date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
+        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count, date FROM bookings WHERE event_id = $event_id group by username"));
         $response = [];
 
         for($i = 0; $i < count($bookings); $i++){
@@ -27,11 +28,11 @@ class BookingController extends Controller
                 'id' => $bookings[$i]->id,
                 'username' => $bookings[$i]->username,
                 'date' => $bookings[$i]->date,
-                'percentage' =>($date->count*100) / count($bookings)
+                'percentage' =>($date->count*100) / count($total_attendees)
             ];
         }
 
-        return response($response, 200)->header('Content-Type', 'text/plain');
+        return response($total_attendees, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -64,7 +65,9 @@ class BookingController extends Controller
      */
     public function update(Request $request, $event_id)
     {
-        Booking::where('event_id', $event_id)->delete();
+        // Booking::where('event_id', $event_id)->delete();
+
+        Booking::where(['event_id', $event_id],['username', $request->username])->delete();
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
