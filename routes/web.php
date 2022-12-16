@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/event', [EventController::class, 'index']);
 Route::get('/event/{id}', [EventController::class, 'show']);
 Route::post('/event', [EventController::class, 'store']);
+Route::put('/event/{id}', [EventController::class, 'update']);
 Route::delete('/event/{id}', [EventController::class, 'destroy']);
 
 // Booking route
