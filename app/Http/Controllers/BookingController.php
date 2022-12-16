@@ -22,12 +22,10 @@ class BookingController extends Controller
 
         for($i = 0; $i < count($dates_by_event); $i++){
             //$response[] = new BookingDTO($bookings[$i]->id, $bookings[$i]->username, $event_id, $bookings[$i]->date, ($date->count*100) / count($bookings));
-
             $response[] = [
                 'id' => $event_id,
-                'can_attend' => explode(',',$dates_by_event[$i]->username),
                 'date' => $dates_by_event[$i]->date,
-                'percentage' =>($dates_by_event[$i]->count*100) / count($total_attendees),
+                'can_attend' => explode(',',$dates_by_event[$i]->username),
                 'cannot_attend' => $this->findNoAttendeesForDate($dates_by_event[$i]->username,  $total_attendees)
             ];
         }
@@ -66,8 +64,6 @@ class BookingController extends Controller
      */
     public function update(Request $request, $event_id)
     {
-        // Booking::where('event_id', $event_id)->delete();
-
         Booking::where([['event_id', $event_id],['username', $request->username]])->delete();
 
         for($i = 0; $i < count($request->timestamps); $i++){
