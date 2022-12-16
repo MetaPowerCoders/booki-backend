@@ -16,21 +16,22 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $bookings = Booking::where('event_id', $event_id)->get();
-        $dates_by_event = DB::select( DB::raw("SELECT date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
-        $total_attendees = DB::select( DB::raw("SELECT date, username, count(username) AS count, date FROM bookings WHERE event_id = $event_id group by username"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
+        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = $event_id group by username"));
         $response = [];
 
-        for($i = 0; $i < count($bookings); $i++){
-            $date = $this->findObjectByDate($bookings[$i]->date,  $dates_by_event);
+        for($i = 0; $i < count($dates_by_event); $i++){
             //$response[] = new BookingDTO($bookings[$i]->id, $bookings[$i]->username, $event_id, $bookings[$i]->date, ($date->count*100) / count($bookings));
+
             $response[] = [
-                'id' => $bookings[$i]->id,
-                'username' => $bookings[$i]->username,
-                'date' => $bookings[$i]->date,
-                'percentage' =>($date->count*100) / count($total_attendees)
+                'id' => $event_id,
+                'can_attend' => $dates_by_event[$i]->username,
+                'date' => $dates_by_event[$i]->date,
+                'percentage' =>($dates_by_event[$i]->count*100) / count($total_attendees),
+                'cannot_attend' => $this->findNoAttendeesForDate($dates_by_event[$i]->username,  $total_attendees)
             ];
         }
+
 
         return response($response, 200)->header('Content-Type', 'text/plain');
     }
@@ -89,5 +90,19 @@ class BookingController extends Controller
         }
 
         return false;
+    }
+
+    function findNoAttendeesForDate($attendees, $total_attendees){
+
+        // $attendees = "Lucas,Maria,Sonia"
+        // $total_attendees = [{"username":"Lucas","count":1},{"username":"Maria","count":1},{"username":"Sonia","count":2}]
+        $result = '';
+        foreach ($total_attendees as $element){
+            if(!str_contains($attendees, $element->username)){
+                $result.=$element->username.',';
+            }
+        }
+
+        return $result;
     }
 }
