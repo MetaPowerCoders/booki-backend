@@ -30,7 +30,7 @@ class EventController extends Controller
     {
 
         $event = new Event([
-            'uuid' => Str::uuid(),
+            'id' => Str::uuid(),
             'title' => $request->title,
             'description' => $request->description,
             'duration' => $request->duration,
@@ -49,7 +49,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = Event::where('uuid', $id)->get();
+        $event = Event::where('id', $id)->get();
         return response($event, 200)->header('Content-Type', 'text/plain');
     }
 
@@ -62,7 +62,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $event = Event::where('uuid', $id);
+        $event = Event::where('id', $id);
 
         if ($request->title && $request->description) {
             $event->update([
@@ -86,7 +86,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        $event = Event::where('uuid', $id);
+        $event = Event::where('id', $id);
         $event->delete();
 
         return response(200)->header('Content-Type', 'text/plain');

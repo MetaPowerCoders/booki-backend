@@ -16,8 +16,8 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
-        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = $event_id group by username"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = '$event_id' group by date"));
+        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = '$event_id' group by username"));
         $response = [];
 
         for($i = 0; $i < count($dates_by_event); $i++){
