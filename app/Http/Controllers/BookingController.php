@@ -49,7 +49,7 @@ class BookingController extends Controller
             $booking = new Booking([
                 'username' => $request->username,
                 'event_id' => $event_id,
-                'date' => $request->timestamps($i)
+                'date' => $request->timestamps[$i]
             ]);
 
             $booking->save();
