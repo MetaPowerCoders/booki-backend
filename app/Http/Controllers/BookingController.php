@@ -25,7 +25,7 @@ class BookingController extends Controller
 
             $response[] = [
                 'id' => $event_id,
-                'can_attend' => $dates_by_event[$i]->username,
+                'can_attend' => explode(',',$dates_by_event[$i]->username),
                 'date' => $dates_by_event[$i]->date,
                 'percentage' =>($dates_by_event[$i]->count*100) / count($total_attendees),
                 'cannot_attend' => $this->findNoAttendeesForDate($dates_by_event[$i]->username,  $total_attendees)
@@ -33,7 +33,7 @@ class BookingController extends Controller
         }
 
 
-        return response($dates_by_event, 200)->header('Content-Type', 'text/plain');
+        return response($response, 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -94,10 +94,10 @@ class BookingController extends Controller
 
     function findNoAttendeesForDate($attendees, $total_attendees){
 
-        $result = '';
+        $result = [];
         foreach ($total_attendees as $element){
             if(!str_contains($attendees, $element->username)){
-                $result.=$element->username.',';
+                $result[] = $element->username;
             }
         }
 
