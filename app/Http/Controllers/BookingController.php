@@ -109,9 +109,9 @@ class BookingController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function hostnameDates($event_id, $hostname)
+    public function usernameDates($event_id, $username)
     {
-        $booking = Booking::where([['event_id', $event_id],['username', $hostname]])->get();
+        $booking = Booking::where([['event_id', $event_id],['username', $username]])->get();
         return response($booking, 200)->header('Content-Type', 'text/plain');
     }
 
