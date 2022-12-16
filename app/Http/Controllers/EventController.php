@@ -19,15 +19,6 @@ class EventController extends Controller
         return response($events, 200)->header('Content-Type', 'text/plain');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -63,17 +54,6 @@ class EventController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -82,7 +62,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $event = Event::where('id', $id);
+        $event = Event::where('id', $id)->get();
 
         if ($request->title && $request->description) {
             $event->update([
@@ -106,9 +86,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-        //
-
-        $event = Event::where('id', $id);
+        $event = Event::where('id', $id)->get();
         $event->delete();
     }
 }
