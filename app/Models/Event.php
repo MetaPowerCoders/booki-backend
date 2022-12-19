@@ -15,6 +15,8 @@ class Event extends Model
        return 'uuid';
      }
 
+    public $incrementing = false;
+
     public function getKeyType ()
     {
         return 'string';
