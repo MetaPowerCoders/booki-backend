@@ -71,7 +71,7 @@ You should have the database up to date and ready to be tried!
 
 <br>
 
-| Method   | Endpoint                              | Description                                 |  params   | response    |
+| Method   | Endpoint                              | Description                                 |  Body     | Response    |
 | -------- | ------------------------------------- | ------------------------------------------- |-----------|-------------|
 | `GET`    | `/event/{id}`                         | Retrieve the event for specific id.         | none      | event obj   |
 | `POST`   | `/event`                              | Create a event.                             | event obj | HTTP verb   |
