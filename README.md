@@ -76,7 +76,7 @@ You should have the database up to date and ready to be tried!
 | `GET`    | `/event/{id}`                         | Retrieve the event for specific id.         | none      | event obj   |
 | `POST`   | `/event`                              | Create a event.                             | event obj | HTTP verb   |
 | `DELETE` | `/event/{id}`                         | Remove event by id                          | none      | HTTP verb   |
-| `PUT`    | `/event/{id}`                         | Edit event                                  | none      | HTTP verb   |
+| `PUT`    | `/event/{id}`                         | Edit event                                  | event obj | HTTP verb   |
 | `GET`    | `/event/{event_id}/booking/`          | Get all bookings associated with an event id group by dates| none      | List < booking obj > |
 | `PUT`    | `/event/{event_id}/booking/`          | Edit bookings for specific event id         | booking obj| HTTP verb  |
 | `POST`   | `/event/{event_id}/booking/`          | Create a booking for a specific event id    | booking obj| HTTP verb  |
