@@ -30,15 +30,15 @@ class EventController extends Controller
     {
 
         $event = new Event([
-            'id' => Str::uuid(),
+            'id' => Str::uuid()->toString(),
             'title' => $request->title,
             'description' => $request->description,
             'duration' => $request->duration,
             'hostname' => $request->hostname
         ]);
-
+        echo json_encode($event, JSON_PRETTY_PRINT);;
         $event->save();
-        return response(200)->header('Content-Type', 'text/plain');
+        return response("", 200)->header('Content-Type', 'text/plain');
     }
 
     /**
