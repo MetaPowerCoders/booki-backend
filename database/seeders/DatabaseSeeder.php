@@ -25,8 +25,10 @@ class DatabaseSeeder extends Seeder
             'hostname' => Str::random(10),
         ]);
 
+        $idBooking = Str::random(20);
+
         DB::table('bookings')->insert([
-            'id' => random_int(0, 5),
+            'id' => $idBooking,
             'username' => Str::random(10),
             'uuid' => $id,
             'date' => random_int(0, 20)

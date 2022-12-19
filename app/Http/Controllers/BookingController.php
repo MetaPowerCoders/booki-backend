@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use BookingDTO;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,6 +46,7 @@ class BookingController extends Controller
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
+                'id' => Str::uuid(),
                 'username' => $request->username,
                 'event_id' => $event_id,
                 'date' => $request->timestamps[$i]
@@ -68,6 +70,7 @@ class BookingController extends Controller
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
+                'id' => Str::uuid(),
                 'username' => $request->username,
                 'event_id' => $event_id,
                 'date' => $request->timestamps[$i]

@@ -13,6 +13,8 @@ class Event extends Model
 
     public $incrementing = false;
 
+    public $incrementing = false;
+
     public function getKeyType ()
     {
         return 'string';
