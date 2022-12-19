@@ -10,4 +10,12 @@ class Booking extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public $incrementing = false;
+
+    public function getKeyType ()
+    {
+        return 'string';
+    }
+
 }

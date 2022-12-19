@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('username');
-            $table->foreignId('event_id')->constrained();
+            $table->foreignUuid('event_id')
+                ->constrained();
             $table->integer('date');
         });
     }

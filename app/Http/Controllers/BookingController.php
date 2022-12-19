@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use BookingDTO;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,8 +17,8 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = $event_id group by date"));
-        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = $event_id group by username"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = '$event_id' group by date"));
+        $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = '$event_id' group by username"));
         $response = [];
 
         for($i = 0; $i < count($dates_by_event); $i++){
@@ -45,6 +46,7 @@ class BookingController extends Controller
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
+                'id' => Str::uuid(),
                 'username' => $request->username,
                 'event_id' => $event_id,
                 'date' => $request->timestamps[$i]
@@ -68,6 +70,7 @@ class BookingController extends Controller
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
+                'id' => Str::uuid(),
                 'username' => $request->username,
                 'event_id' => $event_id,
                 'date' => $request->timestamps[$i]

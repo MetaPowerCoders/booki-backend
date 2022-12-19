@@ -41,3 +41,9 @@ sail artisan migrate
 ```
 
 ### location for controllers: app/Http/Controllers
+
+
+### Run seed command:
+```
+sail artisan db:seed
+```
