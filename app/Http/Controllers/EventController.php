@@ -36,9 +36,8 @@ class EventController extends Controller
             'duration' => $request->duration,
             'hostname' => $request->hostname
         ]);
-        echo json_encode($event, JSON_PRETTY_PRINT);;
         $event->save();
-        return response("", 200)->header('Content-Type', 'text/plain');
+        return response($event, 200)->header('Content-Type', 'text/plain');
     }
 
     /**

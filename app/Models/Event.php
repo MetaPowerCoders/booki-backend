@@ -11,9 +11,7 @@ class Event extends Model
 
     protected $guarded = [];
 
-    public function getRouteKeyName(){
-       return 'uuid';
-     }
+    public $incrementing = false;
 
     public function getKeyType ()
     {
