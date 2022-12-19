@@ -1,3 +1,11 @@
+<p align="center">
+    <img width="200" src="./readme-images/logo.png">
+</p>
+
+<br/>
+
+<h2 align="center">The backend for your favorite meeting webpage</h2>
+
 Go to [command page](commands.md) to have a guide of commands to create migrations, controllers, models and more.
 
 <!-- TABLE OF CONTENTS -->
