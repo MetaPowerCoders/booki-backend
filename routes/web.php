@@ -18,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 //Event route
 
-Route::get('/event', [EventController::class, 'index'])->middleware('cors');
-Route::get('/event/{id}', [EventController::class, 'show'])->middleware('cors');
-Route::post('/event', [EventController::class, 'store'])->middleware('cors');
-Route::put('/event/{id}', [EventController::class, 'update'])->middleware('cors');
-Route::delete('/event/{id}', [EventController::class, 'destroy'])->middleware('cors');
+Route::get('/event',  [EventController::class, 'index']);
+Route::get('/event/{id}', [EventController::class, 'show']);
+Route::post('/event', [EventController::class, 'store']);
+Route::put('/event/{id}', [EventController::class, 'update']);
+Route::delete('/event/{id}', [EventController::class, 'destroy']);
 
 // Booking route
 
-Route::get('/event/{event_id}/booking/', [BookingController::class, 'index'])->middleware('cors');
-Route::get('/event/{event_id}/booking/{username}', [BookingController::class, 'usernameDates'])->middleware('cors');
-Route::post('/event/{event_id}/booking/', [BookingController::class, 'store'])->middleware('cors');
-Route::put('/event/{event_id}/booking/', [BookingController::class, 'update'])->middleware('cors');
+Route::get('/event/{event_id}/booking/', [BookingController::class, 'index']);
+Route::get('/event/{event_id}/booking/{username}', [BookingController::class, 'usernameDates']);
+Route::post('/event/{event_id}/booking/', [BookingController::class, 'store']);
+Route::put('/event/{event_id}/booking/', [BookingController::class, 'update']);
