@@ -45,6 +45,10 @@ If this icon is green, you are ready for the next step.
 You will need to use this information after to connect the database with the server.
 
 run:
+```
+./vendor/bin/sail composer require fruitcake/laravel-cors
+```
+then:
 
 ```
 ./vendor/bin/sail up
