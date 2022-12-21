@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('username');
             $table->foreignUuid('event_id')
                 ->constrained();
-            $table->integer('date');
+            $table->integer('date')->nullable();
         });
     }
 

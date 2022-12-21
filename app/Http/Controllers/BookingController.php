@@ -17,7 +17,7 @@ class BookingController extends Controller
      */
     public function index($event_id)
     {
-        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = '$event_id' group by date"));
+        $dates_by_event = DB::select( DB::raw("SELECT GROUP_CONCAT(DISTINCT username) as username, count(username) as total_attendees, date, count(date) AS count FROM bookings WHERE event_id = '$event_id' and date IS NOT NULL group by date"));
         $total_attendees = DB::select( DB::raw("SELECT username, count(username) AS count FROM bookings WHERE event_id = '$event_id' group by username"));
         $response = [];
 
@@ -67,6 +67,17 @@ class BookingController extends Controller
     public function update(Request $request, $event_id)
     {
         Booking::where([['event_id', $event_id],['username', $request->username]])->delete();
+
+        if(count($request->timestamps) == 0){
+            $booking = new Booking([
+                'id' => Str::uuid(),
+                'username' => $request->username,
+                'event_id' => $event_id,
+                'date' => null
+            ]);
+
+            $booking->save();
+        }
 
         for($i = 0; $i < count($request->timestamps); $i++){
             $booking = new Booking([
