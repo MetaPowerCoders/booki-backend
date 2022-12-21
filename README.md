@@ -12,8 +12,8 @@ Go to [command page](commands.md) to have a guide of commands to create migratio
 <details open="open">
   <summary><h2 style="display: inline-block"> 📋 Table of Contents</h2></summary>
   <ol>
-    <li>Installation and Documentation</li>
-    <li>Technology used</li>
+    <li> Installation and Documentation</li>
+    <li> Technology used</li>
     <li> Have a question?</li>
     <li> Found a bug?</li>
     <li> Requirements</li>
@@ -26,10 +26,10 @@ Go to [command page](commands.md) to have a guide of commands to create migratio
 
 You will need to clone the code from [booki-backend](https://github.com/MetaPowerCoders/booki-backend.git).
 
-1. To use this code, you must have the following installed:
+1. To use this code, you <u>MUST</u> have the following installed:
 
-    1. Docker
-    2. TablePlus
+    1. Docker - [find the link to install it here](https://docs.docker.com/get-docker/)
+    2. TablePlus - [find the link to install it here](https://tableplus.com/)
     3. IDE
 
 2. Docker will need to be opened and running. Make sure checking the below:
