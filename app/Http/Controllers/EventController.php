@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -96,12 +97,15 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
-            try {
+        try {
             $event = Event::findOrFail($id);
         } catch(\Exception $exception){
             $errormsg = 'No Event found!';
             return response($errormsg, 404)->header('Content-Type', 'text/plain');
         }
+
+        $bookings = Booking::where('event_id', $id);
+        $bookings->delete();
 
         $event->delete();
 
